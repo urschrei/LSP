@@ -134,10 +134,11 @@ def unload_settings():
 
 
 class ClientConfig(object):
-    def __init__(self, name, binary_args, scopes, syntaxes, languageId,
+    def __init__(self, name, binary_args, tcp_port, scopes, syntaxes, languageId,
                  enabled=True, init_options=dict(), settings=dict(), env=dict()):
         self.name = name
         self.binary_args = binary_args
+        self.tcp_port = tcp_port
         self.scopes = scopes
         self.syntaxes = syntaxes
         self.languageId = languageId
@@ -151,6 +152,7 @@ def read_client_config(name, client_config):
     return ClientConfig(
         name,
         client_config.get("command", []),
+        client_config.get("tcp_port", None),
         client_config.get("scopes", []),
         client_config.get("syntaxes", []),
         client_config.get("languageId", ""),
